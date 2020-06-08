@@ -1,20 +1,20 @@
-package com.example.track;
+package com.example.track.Data;
 
 
-public class Data {
+public class DataProgress {
 
-    String name = "kalachan";
+    public String name = "kalachan";
 
-    int progress ;
+    public int progress ;
 
-    String imgUrl;
+    public String imgUrl;
 
 //constructor
 
-    public Data() {
+    public DataProgress() {
     }
 
-    public Data(String name, int progress, String imgUrl) {
+    public DataProgress(String name, int progress, String imgUrl) {
         this.name = name;
         this.progress = progress;
         this.imgUrl = imgUrl;

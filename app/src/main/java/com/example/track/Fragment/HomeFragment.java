@@ -1,4 +1,4 @@
-package com.example.track;
+package com.example.track.Fragment;
 
 import android.os.Bundle;
 
@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,23 +15,30 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.example.track.Data.DataProgress;
+import com.example.track.OnChangeFragmentListener;
+import com.example.track.R;
+import com.example.track.adaptor.AdaptorProgress;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class Home extends Fragment {
+public class HomeFragment extends Fragment {
     TextView project_name;
     ImageView imageView, imageView2;
     ProgressBar progressBar;
-    Data data;
+    DataProgress data;
     int counter;
     RecyclerView recyclerView;
-    Adaptor adaptor;
-    List<Data> list;
+    AdaptorProgress adaptor;
+    List<DataProgress> list;
+    private OnChangeFragmentListener onChangeFragmentListener;
+
+    public HomeFragment(OnChangeFragmentListener onChangeFragmentListener) {
+
+        this.onChangeFragmentListener = onChangeFragmentListener;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +53,7 @@ public class Home extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
-        adaptor = new Adaptor(list);
+        adaptor = new AdaptorProgress(list,onChangeFragmentListener);
         recyclerView.setAdapter(adaptor);
 
         datasync();
@@ -55,22 +61,22 @@ public class Home extends Fragment {
     }
 
     public void datasync() {
-
-        list.add(new Data(
+        list.add(new DataProgress(
                 "Project saurav ",
                 30,
                 "https://i.pinimg.com/originals/41/9d/54/419d5479ec3c3d495cefca011277da16.jpg"
         ));
-        list.add(new Data(
+        list.add(new DataProgress(
                 "Project shakil",
                 100,
                 "https://i.pinimg.com/originals/41/9d/54/419d5479ec3c3d495cefca011277da16.jpg"
         ));
-        list.add(new Data(
+        list.add(new DataProgress(
                 "Project tanmoy",
                 10,
                 "https://i.pinimg.com/originals/41/9d/54/419d5479ec3c3d495cefca011277da16.jpg"
         ));
+
         adaptor.notifyDataSetChanged();
     }
 

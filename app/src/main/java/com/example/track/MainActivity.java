@@ -7,17 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.track.Fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity  {
-Fragment home,bell,badge,menu;
+public class MainActivity extends AppCompatActivity implements OnChangeFragmentListener {
+    Fragment home, bell, badge, menu;
+    public final static String TAG="MY_LOG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        home =new Home();
+        home = new HomeFragment(this);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -44,20 +46,15 @@ Fragment home,bell,badge,menu;
                     }
                 });
 
-
-        getSupportFragmentManager().beginTransaction().add(R.id.frame,home).commit();
-
-
-
-
+        getSupportFragmentManager().beginTransaction().add(R.id.frame, home).commit();
     }
 
-    public void onfragmentchange(Fragment fragment){
+    public void onfragmentchange(Fragment fragment) {
 
-        
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frame,fragment)
+                .replace(R.id.frame, fragment)
                 .addToBackStack(null)
                 .commit();
     }
